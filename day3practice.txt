@@ -1,0 +1,49 @@
+/*
+ * Brandon Denardo, 8/19/21, Day 2 Bootcamp Code
+ *
+ */
+
+#define _CRT_SECURE_NO_WARNINGS //for Visual Studio compiler
+#pragma warning(disable:6031) //ignore scanf warnings for Visual Studio compiler
+
+#include<stdio.h> //for printf and scanf
+ //int, double, char
+ //int %d scanf and %d printf
+ //double %lf scanf and %f printf - standard C
+ //char space %c scanf and %c printf 
+
+
+int main()
+{
+	double miles, kilometers;
+	char initial;  // character %c
+	char name[30]; //string %s
+
+	//1Greet the user
+	printf("Welcome to the mile to kilometer calculator");
+	//2Ask the user to enter the number of miles
+	printf("\n\nPlease enter the number of miles:   ");
+	//3Get the number of miles from the keyboard
+	scanf("%lf", &miles);
+	//echo the input
+	printf("\nYou entered %.2f\n",miles);
+	
+	printf("\nPlease enter your initial:   ");
+	//3Get the number of miles from the keyboard
+	scanf(" %c", &initial);
+
+	printf("Please enter your last name: ");
+	scanf(" %s", name);
+	
+	printf("\nWow %c. %s you entered %.2f\n", initial, name, miles);
+		
+	//convert miles to kilometers
+	kilometers = 1.609 * miles; //assignment statement with a mathematical expression
+	
+	//math in C - * (multiplication) + (addition) -(subtraction) / (division)
+	
+	//5Display the results onto the screen
+	printf("\nHere are the results %c: \nMiles are %.1f and kilometers are %.1f\n\n", initial, miles, kilometers);
+
+	return 0;
+}

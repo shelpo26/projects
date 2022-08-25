@@ -1,0 +1,44 @@
+/*
+ * Brandon Denardo, 8/21/21
+ * assignment 3 roadtrip gas calculator implementation
+ */
+
+#define _CRT_SECURE_NO_WARNINGS //for Visual Studio compiler
+#pragma warning(disable:6031) //ignore scanf warnings
+
+#include<stdio.h> //for printf and scanf
+
+int main()
+{
+	//declare variables
+	char firstname[20];//for the first name use %s with printf and scanf
+	double miles, MPG, price, gascost;
+
+	//greet the user
+	printf("Welcome to the road trip planner\n");
+
+	//ask and get the first name
+	printf("Please enter your first name: ");
+	scanf(" %s", firstname);
+
+	//ask and get the number of miles
+	printf("\nEnter the number of miles you are traveling:");
+	scanf("%lf", &miles);
+
+	//ask and get the price of gas per gallon
+	printf("\nEnter the price of gas per gallon:");
+	scanf("%lf", &price);
+	//ask and get the MPG
+	printf("\nEnter your cars miles per gallon:");
+	scanf("%lf", &MPG);
+
+	printf("\n%s, I will now calculate the total cost for you\n\n", firstname);
+
+	//calculate the gas cost
+	gascost = (price * miles)/MPG;
+
+	//print the total cost of gas)
+	printf("This is your total cost of gas: %.2f dollars ", gascost);
+
+	return 0;
+}

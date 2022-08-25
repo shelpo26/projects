@@ -1,0 +1,163 @@
+/* Assignment 4 Brandon Denardo*/
+
+#include <iostream>
+#include <time.h>
+#include <stdio.h>
+#include <cstdlib>
+using namespace std;
+
+//create structure of the list
+struct slinklist {
+	int data;
+	struct slinklist* next;
+	struct slinklist* right;
+};
+typedef struct slinklist node;
+node* start = NULL;
+
+int menu()
+{
+	int ch;
+	cout << "\n1. InsertQ \n2. DeleteQ\n3. DisplayQ\n4. Exit\n";
+	cin >> ch;
+	return ch;
+}
+
+//create new node
+node* getnode()
+{
+	node* newnode;
+	newnode = (node*)malloc(sizeof(node));
+	cout << "\nEnter data for new node: ";
+	cin >> newnode->data;
+	newnode->next = NULL;
+	return newnode;
+}
+
+//create the SLL
+void createlist(int n)
+{
+	int i;
+	node* newnode;
+	node* temp;
+
+	for (i = 0; i < n; i++)
+	{
+		newnode = getnode();
+		if (start == NULL)
+		{
+			start = newnode;
+		}
+		else
+		{
+			temp = start;
+			while (temp->next != NULL)
+				temp = temp->next;
+			temp->next = newnode;
+
+		}
+	}
+}
+
+//get node count
+int countnode(node* start)
+{
+	node* head;
+	head = start;
+	int count = 0;
+
+	while (head != NULL)
+	{
+		head = head->next;
+		count++;
+	}
+
+	cout << "\nCount = " << count;
+	return count;
+}
+
+//insert node in queue (FIFO)
+void insertQ()
+{
+	node* newnode;
+	node* temp;
+
+	newnode = getnode();
+	if (start == NULL)
+	{
+		start = newnode;
+	}
+
+	else
+	{
+		temp = start;
+		while (temp->next != NULL)
+		{
+			temp = temp->next;
+		}
+		temp->next = newnode;
+	}
+}
+
+//delete node from queue (FIFO)
+void deleteQ()
+{
+	node* temp;
+
+	if (start == NULL)
+	{
+		cout << "\nNo nodes";
+		return;
+	}
+	else
+	{
+		temp = start;
+		start = temp->next;
+		free(temp);
+		cout << "\nNode deleted";
+	}
+}
+
+//display queue from left to right
+void displayQ()
+{
+	int n;
+	node* temp;
+	temp = start;
+	cout << "\nThe contents of the list from left to right: ";
+
+	if (start == NULL)
+	{
+		cout << "\nEmpty List";
+	}
+	else
+	{
+		while (temp != NULL)
+		{
+			cout << temp->data;
+			temp = temp->next;
+		}
+	}
+}
+
+//main functions to call all functions and perform operations
+int main() {
+
+	int ch;
+
+	do {
+		ch = menu();
+		switch (ch) {
+		case 1: insertQ();
+			break;
+		case 2: deleteQ();
+			break;
+		case 3: displayQ();
+			break;
+		case 4: cout << "Exit" << endl;
+			break;
+		default: cout << "Invalid choice" << endl;
+		}
+	} while (ch != 4);
+	return 0;
+}

@@ -1,0 +1,37 @@
+/*
+ * Brandon Denardo, 8/19/21, Day 2 Bootcamp Code
+ *
+ */
+
+#define _CRT_SECURE_NO_WARNINGS //for Visual Studio compiler
+#pragma warning(disable:6031) //ignore scanf warnings for Visual Studio compiler
+
+#include<stdio.h> //for printf and scanf
+
+int main()
+{
+	//start execution
+	char letter; // any characters scanf space%c
+	char name[30];
+	double miles, kilometers; // floating points 2.0 scanf %lf
+
+	//Greeting
+	printf("Hello Welcome!");
+	//Ask for first name
+	printf("\nPlease enter your first name: ");
+	//Get first name
+	scanf(" %s", &name);
+	//print name
+	printf("Your name is: %s", name);
+	//Ask for # of miles
+	printf("\n Enter the number of miles:");
+	//Get # of miles
+	scanf("%lf", &miles);
+	//Calculate number of km
+	kilometers = 1.609 * miles;
+	//Display results
+	printf("\nThese are the amount of kilometers: ");
+	printf("\n%.2f miles equals %.2f kilometers\n", miles, kilometers);
+
+	return 0;
+}

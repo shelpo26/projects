@@ -1,0 +1,56 @@
+/*
+* Brandon Denardo, 8/23/21
+* assignment 4 roadtrip gas calculator that does not allow divide by zero
+*/
+
+#define _CRT_SECURE_NO_WARNINGS //for Visual Studio compiler
+#pragma warning(disable:6031) //ignore scanf warnings
+
+#include<stdio.h> //for printf and scanf
+
+int main()
+{
+	//declare variables
+	char firstname[20];//for the first name use %s with printf and scanf
+	double miles, price, MPG, gascost;
+	
+	//greet the user
+	printf("Hi, welcome to the gas cost calculator!");
+	
+	//ask and get the first name
+	printf("Please enter your first name: ");
+	scanf(" %s", firstname);
+
+	//ask and get the number of miles
+	printf("\nEnter the number of miles you are traveling:");
+	scanf("%lf", &miles);
+
+	//ask and get the price of gas per gallon
+	printf("\nEnter the price of gas per gallon:");
+	scanf("%lf", &price);
+
+	//ask and get the MPG
+	printf("\nEnter your cars miles per gallon:");
+	scanf("%lf", &MPG);
+
+	//test to see if MPG is 0
+	if (MPG == 0)
+	{
+		printf("\nYou entered 0 for the MPG, cannot divide by zero\n");
+	}
+	//MPG is not 0 you can do the calculation
+	else
+	{
+		printf("\n%s, I will now calculate the cost of gas for you\n\n", firstname);
+
+		//calculate the gas cost
+		gascost = (price * miles) / MPG;
+
+			//print the total cost of gas)
+			printf("Here is your total cost of gas: %.2f dollars", gascost);
+
+		printf("\nHave a great road trip %s :)\n\n", firstname);
+	}
+
+	return 0;
+}

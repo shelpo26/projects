@@ -1,0 +1,310 @@
+Assignment 3 Brandon Denardo Z23596879
+
+
+---------------------------------------------------------------------------------------------------
+/* Assignment 3 Question 1 Brandon Denardo*/
+#include <iostream>
+#include <time.h>
+#include <stdio.h>
+#include <cstdlib>
+using namespace std;
+
+//create structure of the list
+struct slinklist {
+	int data;
+	struct slinklist* next;
+	struct slinklist* right;
+};
+typedef struct slinklist node;
+node* start = NULL;
+
+//create new node
+node* getnode()
+{
+	node* newnode;
+	newnode = (node*)malloc(sizeof(node));
+	cout << "\nEnter data for new node: ";
+	cin >> newnode->data;
+	newnode->next = NULL;
+	return newnode;
+}
+
+//create the SLL
+void createlist(int n)
+{
+	int i;
+	node* newnode;
+	node* temp;
+
+	for (i = 0; i < n; i++)
+	{
+		newnode = getnode();
+		if (start == NULL)
+		{
+			start = newnode;
+		}
+		else
+		{
+			temp = start;
+			while (temp->next != NULL)
+				temp = temp->next;
+			temp->next = newnode;
+
+		}
+	}
+}
+
+
+int countnode(node* start)
+{
+	node* head;
+	head = start;
+	int count = 0;
+
+	while (head != NULL)
+	{
+		head = head->next;
+		count++;
+	}
+
+	cout << "\nCount = " << count;
+	return count;
+}
+
+void delete_at_mid()
+{
+	node* prev;
+	node* temp;
+	int pos, nodectr, ctr = 1;
+
+	if (start == NULL)
+	{
+		cout << "\nEmpty List";
+		return;
+	}
+	else
+	{
+		cout << "\n\nEnter position of node to delete: ";
+		cin >> pos;
+		nodectr = countnode(start);
+		if (pos > nodectr)
+		{
+			cout << "\nThis node doesnt exist.";
+		}
+		if (pos > 1 && pos < nodectr)
+		{
+			temp = prev = start;
+			while (ctr < pos)
+			{
+				prev = temp;
+				temp = temp->next;
+				ctr++;
+			}
+			prev->next = temp->next;
+			free(temp);
+			cout << "\nNode deleted";
+		}
+	}
+}
+
+void traverse()
+{
+	int n;
+	node* temp;
+	temp = start;
+	cout << "\nThe contents of the list from left to right: ";
+
+	if (start == NULL)
+	{
+		cout << "\nEmpty List";
+	}
+	else
+	{
+		while (temp != NULL)
+		{
+			cout << temp->data;
+			temp = temp->next;
+		}
+	}
+}
+
+void ins_in_mid()
+{
+	node* newnode, * temp, * prev;
+	int pos, nodectr, ctr = 1;
+	newnode = getnode();
+	cout << "\nEnter the position of the node you want to insert: ";
+	cin >> pos;
+	nodectr = countnode(start);
+	if (pos > 1 && pos < nodectr)
+	{
+		temp = start;
+		prev = start;
+		while (ctr < pos)
+		{
+			prev = temp;
+			temp = temp->next;
+			ctr++;
+		}
+		prev->next = newnode;
+		newnode->next = temp;
+	}
+	else
+		cout << "\nError";
+}
+
+int main()
+{
+	int n = 4;
+	createlist(n);
+	traverse();
+
+	delete_at_mid();
+	traverse();
+
+	ins_in_mid();
+	traverse();
+
+	return 0;
+}
+
+--------------------------------------------------------------------------------------------------
+
+/* Assignment 3 Question 2 Brandon Denardo*/
+
+#include <iostream>
+#include <time.h>
+#include <stdio.h>
+#include <cstdlib>
+
+using namespace std;
+
+//create structure of the list
+struct slinklist {
+	int data;
+	struct slinklist* left;
+	struct slinklist* right;
+};
+typedef struct slinklist node;
+node* start = NULL;
+
+//create new node
+node* getnode()
+{
+	node* newnode;
+	newnode = (node*)malloc(sizeof(node));
+	cout << "\nEnter data for new node: ";
+	cin >> newnode->data;
+	newnode->left = NULL;
+	newnode->right = NULL;
+	return newnode;
+}
+
+//create the SLL
+void createlist(int n)
+{
+	int i;
+	node* newnode;
+	node* temp;
+
+	for (i = 0; i < n; i++)
+	{
+		newnode = getnode();
+		if (start == NULL)
+		{
+			start = newnode;
+		}
+		else
+		{
+			temp = start;
+			while (temp->right)
+				temp = temp->right;
+			temp->right = newnode;
+			newnode->left = temp;
+		}
+	}
+}
+
+int countnode(node* start)
+{
+	if (start == NULL)
+		return 0;
+	else
+		return (1 + countnode(start->right));
+}
+
+void delete_at_end()
+{
+
+	if (start == NULL)
+	{
+		cout << "\nEmpty List";
+		return;
+	}
+	node* prev;
+	node* temp;
+	temp = start;
+	prev = start;
+	while (temp->right != NULL)
+	{
+		prev = temp;
+		temp = temp->right;
+	}
+	prev->right = NULL;
+	free(temp);
+	cout << "\n\nNode deleted";
+}
+
+void ins_at_beg()
+{
+	node* newnode;
+	newnode = getnode();
+	if (start == NULL)
+	{
+		start = newnode;
+	}
+	else
+	{
+		newnode->right = start;
+		start->left = newnode;
+		start = newnode;
+	}
+
+}
+	
+
+void traverse()
+{
+	int n;
+	node* temp;
+	temp = start;
+	cout << "\n\nThe contents of the list from left to right: ";
+
+	if (start == NULL)
+	{
+		cout << "\nEmpty List";
+	}
+	else
+	{
+		while (temp != NULL)
+		{
+			cout << temp->data;
+			temp = temp->right;
+		}
+	}
+}
+
+int main()
+{
+	int n = 4;
+	createlist(n);
+	traverse();
+
+	delete_at_end();
+	traverse();
+
+	ins_at_beg();
+	traverse();
+
+	return 0;
+}
